@@ -152,6 +152,7 @@ export default function MainShellWithNav() {
                         <Link
                           key={item.name}
                           to={item.to}
+                          onClick={() => setSidebarOpen(false)}
                           className={classNames(
                             IsActive(item.to)
                               ? 'bg-gray-100 text-gray-900'
@@ -182,6 +183,7 @@ export default function MainShellWithNav() {
                         <Link
                           key={item.name}
                           to={item.to}
+                          onClick={() => setSidebarOpen(false)}
                           className='text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md'
                         >
                           <item.icon
@@ -291,16 +293,16 @@ export default function MainShellWithNav() {
                         {item.name}
                       </Link>
                     ))}
-                    <button
+                    <div
                       onClick={handleLogout}
-                      className='text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                      className='text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md cursor-pointer'
                     >
                       <LogoutIcon
                         className='text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6'
                         aria-hidden='true'
                       />
                       Logout
-                    </button>
+                    </div>
                   </div>
                 </nav>
               </div>
