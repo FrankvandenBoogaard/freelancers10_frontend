@@ -85,15 +85,28 @@ export default function PanelFreelancerProfile() {
       imageUrl: Yup.string().url().typeError('Incorrect URL'),
       availableFrom: Yup.date().nullable(),
       hourlyRate: Yup.number()
-        .transform((value) => (isNaN(value) ? null : value))
-        .nullable(),
+        .min(0)
+        .max(99999999.99)
+        .nullable()
+        .transform((v, o) => (o === '' ? null : v))
+        .typeError('Not a number'),
       email: Yup.string().email(),
-      phoneNumber: Yup.number().required(),
+      phoneNumber: Yup.number()
+      .min(0)
+      .max(99999999999)
+      .integer('no decimals')
+      .nullable()
+      .transform((v, o) => (o === '' ? null : v))
+        .required('Phone number is required')
+        .typeError('Not a number'),
       placeOfResidence: Yup.string(),
       rating: Yup.number()
-        .transform((value) => (isNaN(value) ? null : value))
-        .nullable(),
-      //rating: Yup.lazy((value) => (value === '' ? null : Yup.number())),
+        .min(0)
+        .max(10)
+        .integer('no decimals')
+        .nullable()
+        .transform((v, o) => (o === '' ? null : v))
+        .typeError('Not a number'),
       description: Yup.string(),
     })
     .required();
@@ -516,9 +529,6 @@ export default function PanelFreelancerProfile() {
                     <option value='Digital marketeer'>Digital marketeer</option>
                     <option value='Business analyst'>Business analyst</option>
                     <option value='Project manager'>Project manager</option>
-                    
-
-
                   </select>
                   {errors.competence && (
                     <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
@@ -566,8 +576,6 @@ export default function PanelFreelancerProfile() {
                   {errors.imageUrl?.message}
                 </p>
               </div>
-
-              
 
               <div className='col-span-6'>
                 <label
