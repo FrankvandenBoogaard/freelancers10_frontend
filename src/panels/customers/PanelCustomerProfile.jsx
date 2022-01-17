@@ -78,7 +78,13 @@ export default function PanelCustomerProfile() {
     customerImageUrl: Yup.string().url(),
     customerContact: Yup.string(),
     customerEmail: Yup.string().email(),
-    customerPhone: Yup.number().required('Phone number is required'),
+    customerPhone: Yup.number()
+      .min(0)
+      .max(999999999999999)
+      .integer('no decimals')
+      .nullable()
+      .transform((v, o) => (o === '' ? null : v))
+      .typeError('Not a number'),
   });
 
   const { loading, error, data, refetch } = useQuery(CUSTOMER_QUERY, {
@@ -110,7 +116,7 @@ export default function PanelCustomerProfile() {
       variables: {
         data: data,
       },
-    }).then(({data}) => {
+    }).then(({ data }) => {
       navigate(`/customers/${data.createCustomer.data.id}`);
     });
   }
