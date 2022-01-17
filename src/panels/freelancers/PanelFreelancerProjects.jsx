@@ -200,24 +200,26 @@ export default function PanelFreelancerProjects() {
                     </span>
                     <div className='ml-4 truncate'>
                       <p className='text-sm font-medium text-gray-900 truncate'>
-                      {project.attributes.projectName}
+                        {project.attributes.projectName}
                       </p>
                       <p className='text-sm text-gray-500 truncate'>
-                      {new Date(
-                            project.attributes.projectStart
-                          ).toLocaleDateString(undefined, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                          })}{' '}
-                          -{' '}
-                          {new Date(
-                            project.attributes.projectFinish
-                          ).toLocaleDateString(undefined, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                          })}
+                        {new Date(
+                          project.attributes.projectStart
+                        ).toLocaleDateString(undefined, {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}{' '}
+                        -{' '}
+                        {project.attributes.projectFinish
+                          ? new Date(
+                              project.attributes.projectFinish
+                            ).toLocaleDateString(undefined, {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })
+                          : 'to be determined'}
                       </p>
                     </div>
                   </div>
