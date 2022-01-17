@@ -64,11 +64,20 @@ export default function PanelTaskDescription() {
       .typeError('Date is required')
       .required('Date is required'),
     taskFinish: Yup.date()
-      .typeError('Date is required')
       .min(Yup.ref('taskStart'), "End date can't be before start date")
-      .required('Date is required'),
-    taskPurchase: Yup.number().required('Purchase amount is required'),
-    taskSale: Yup.number().required('Sale amount is required'),
+      .nullable(),
+    taskPurchase: Yup.number()
+      .min(0)
+      .max(99999999.99)
+      .nullable()
+      .transform((v, o) => (o === '' ? null : v))
+      .typeError('Not a number'),
+    taskSale: Yup.number()
+      .min(0)
+      .max(99999999.99)
+      .nullable()
+      .transform((v, o) => (o === '' ? null : v))
+      .typeError('Not a number'),
     taskDescription: Yup.string(),
   });
 
@@ -242,9 +251,9 @@ export default function PanelTaskDescription() {
                     control={control}
                     name='taskFinish'
                     defaultValue={
-                      data?.task
-                        ? new Date(data?.task.data.attributes.taskFinish)
-                        : null
+                      (data?.task.data.attributes.taskFinish &&
+                        new Date(data?.task.data.attributes.taskFinish)) ||
+                      null
                     }
                     render={({ field }) => (
                       <ReactDatePicker
@@ -256,7 +265,9 @@ export default function PanelTaskDescription() {
                         )}
                         //placeholderText='Select date'
                         onChange={(e) => field.onChange(e)}
-                        selected={field.value}
+                        selected={
+                          (field.value && new Date(field.value)) || null
+                        }
                         todayButton='Today'
                         minDate={new Date()}
                       />

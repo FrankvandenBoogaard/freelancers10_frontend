@@ -145,10 +145,7 @@ export default function DirectoryTasks() {
                   <div>
                     <div className='relative group py-4 px-6 flex items-center'>
                       <div className='-m-1 flex-1 block p-1'>
-                        <div
-                          className='absolute inset-0'
-                          aria-hidden='true'
-                        />
+                        <div className='absolute inset-0' aria-hidden='true' />
                         <div className='flex-1 flex items-center min-w-0 relative'>
                           <span className='bg-gray-50 border rounded-lg p-1 flex-shrink-0 inline-block relative'>
                             <DocumentTextIcon
@@ -292,13 +289,15 @@ export default function DirectoryTasks() {
                                   day: 'numeric',
                                 })}{' '}
                                 -{' '}
-                                {new Date(
-                                  task.attributes.taskFinish
-                                ).toLocaleDateString(undefined, {
-                                  year: 'numeric',
-                                  month: 'short',
-                                  day: 'numeric',
-                                })}
+                                {(task?.attributes.taskFinish &&
+                                  new Date(
+                                    task?.attributes.taskFinish
+                                  ).toLocaleDateString(undefined, {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric',
+                                  })) ||
+                                  'to be determined'}
                               </p>
                             </div>
                           </div>

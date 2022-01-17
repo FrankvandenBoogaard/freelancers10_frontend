@@ -76,11 +76,20 @@ export default function PanelProjectDescription() {
       .typeError('Date is required')
       .required('Date is required'),
     projectFinish: Yup.date()
-      .typeError('Date is required')
       .min(Yup.ref('projectStart'), "End date can't be before start date")
-      .required('Date is required'),
-    projectPurchase: Yup.number(),
-    projectSale: Yup.number(),
+      .nullable(),
+    projectPurchase: Yup.number()
+      .min(0)
+      .max(99999999.99)
+      .nullable()
+      .transform((v, o) => (o === '' ? null : v))
+      .typeError('Not a number'),
+    projectSale: Yup.number()
+      .min(0)
+      .max(99999999.99)
+      .nullable()
+      .transform((v, o) => (o === '' ? null : v))
+      .typeError('Not a number'),
     projectDescription: Yup.string(),
   });
 
@@ -168,7 +177,7 @@ export default function PanelProjectDescription() {
                   htmlFor='project-name'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Project name
+                  Project name*
                 </label>
                 <div className='mt-1 relative'>
                   <input
@@ -201,16 +210,14 @@ export default function PanelProjectDescription() {
                   htmlFor='project-start'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Project start
+                  Project start*
                 </label>
                 <div className='mt-1 relative'>
                   <Controller
                     control={control}
                     name='projectStart'
                     defaultValue={
-                      data?.project
-                        ? new Date(data?.project.data.attributes.projectStart)
-                        : null
+                      new Date(data?.project.data.attributes.projectStart)
                     }
                     render={({ field }) => (
                       <ReactDatePicker
@@ -257,9 +264,11 @@ export default function PanelProjectDescription() {
                     control={control}
                     name='projectFinish'
                     defaultValue={
-                      data?.project
-                        ? new Date(data?.project.data.attributes.projectFinish)
-                        : null
+                      (data?.project.data.attributes.projectFinish &&
+                        new Date(
+                          data?.project.data.attributes.projectFinish
+                        )) ||
+                      null
                     }
                     render={({ field }) => (
                       <ReactDatePicker
@@ -271,7 +280,9 @@ export default function PanelProjectDescription() {
                         )}
                         //placeholderText='Select date'
                         onChange={(e) => field.onChange(e)}
-                        selected={field.value}
+                        selected={
+                          (field.value && new Date(field.value)) || null
+                        }
                         todayButton='Today'
                         minDate={new Date()}
                       />

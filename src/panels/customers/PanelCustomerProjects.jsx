@@ -205,13 +205,15 @@ export default function PanelCustomerProjects() {
                           day: 'numeric',
                         })}{' '}
                         -{' '}
-                        {new Date(
-                          project.attributes.projectFinish
-                        ).toLocaleDateString(undefined, {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
+                        {(project?.attributes.projectFinish &&
+                          new Date(
+                            project.attributes.projectFinish
+                          ).toLocaleDateString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })) ||
+                          'to be determined'}
                       </p>
                     </div>
                   </div>

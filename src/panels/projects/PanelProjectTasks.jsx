@@ -199,26 +199,27 @@ export default function PanelProjectTasks() {
                     </span>
                     <div className='ml-4 truncate'>
                       <p className='text-sm font-medium text-gray-900 truncate'>
-                      {task.attributes.taskName}
+                        {task.attributes.taskName}
                       </p>
                       <p className='text-sm text-gray-500 truncate'>
-                      {new Date(task.attributes.taskStart).toLocaleDateString(
-                        undefined,
-                        {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        }
-                      )}{' '}
-                      -{' '}
-                      {new Date(task.attributes.taskFinish).toLocaleDateString(
-                        undefined,
-                        {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        }
-                      )}
+                        {new Date(task.attributes.taskStart).toLocaleDateString(
+                          undefined,
+                          {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          }
+                        )}{' '}
+                        -{' '}
+                        {(task?.attributes.taskFinish &&
+                          new Date(
+                            task.attributes.taskFinish
+                          ).toLocaleDateString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })) ||
+                          'to be determined'}
                       </p>
                     </div>
                   </div>
