@@ -93,7 +93,7 @@ export default function PanelFreelancerProfile() {
       email: Yup.string().email(),
       phoneNumber: Yup.number()
       .min(0)
-      .max(99999999999)
+      .max(999999999999999)
       .integer('no decimals')
       .nullable()
       .transform((v, o) => (o === '' ? null : v))
