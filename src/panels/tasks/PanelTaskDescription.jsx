@@ -165,7 +165,7 @@ export default function PanelTaskDescription() {
                   htmlFor='task-name'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Task name
+                  Task name*
                 </label>
                 <div className='mt-1 relative'>
                   <input
@@ -198,7 +198,7 @@ export default function PanelTaskDescription() {
                   htmlFor='task-start'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Task start
+                  Task start*
                 </label>
                 <div className='mt-1 relative'>
                   <Controller
