@@ -20,6 +20,7 @@ const FREELANCERS = gql`
           lastName
           phoneNumber
           availableFrom
+          competence
         }
       }
     }
@@ -59,9 +60,18 @@ export default function DirectoryFreelancers() {
   function onSubmit(e) {
     refetchDirectory({
       filters: {
-        lastName: {
-          containsi: e.search,
-        },
+        or: [
+          {
+            lastName: {
+              containsi: e.search,
+            },
+          },
+          {
+            competence: {
+              containsi: e.search,
+            },
+          },
+        ],
       },
     });
   }
@@ -119,7 +129,7 @@ export default function DirectoryFreelancers() {
                   autoComplete='off'
                   {...register('search')}
                   className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
-                  placeholder='Last name'
+                  placeholder='Last name / Competence'
                 />
               </div>
             </div>
@@ -295,13 +305,14 @@ export default function DirectoryFreelancers() {
                                 {freelancer.attributes.firstName}
                               </p>
                               <p className='text-sm text-gray-500 truncate'>
-                                {new Date(
+                                {freelancer.attributes.competence}
+                                {/* {new Date(
                                   freelancer.attributes.availableFrom
                                 ).toLocaleDateString(undefined, {
                                   year: 'numeric',
                                   month: 'short',
                                   day: 'numeric',
-                                })}
+                                })} */}
                               </p>
                             </div>
                           </div>

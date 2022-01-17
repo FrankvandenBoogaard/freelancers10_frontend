@@ -24,6 +24,7 @@ const FREELANCER_QUERY = gql`
           placeOfResidence
           rating
           description
+          competence
           createdAt
           updatedAt
           tasks {
@@ -82,15 +83,17 @@ export default function PanelFreelancerProfile() {
       firstName: Yup.string().required('First name is required'),
       lastName: Yup.string().required('Last name is required'),
       imageUrl: Yup.string().url().typeError('Incorrect URL'),
-      availableFrom: Yup.date(),
-      hourlyRate: Yup.lazy((value) =>
-        value === '' ? undefined : Yup.number()
-      ),
+      availableFrom: Yup.date().nullable(),
+      hourlyRate: Yup.number()
+        .transform((value) => (isNaN(value) ? null : value))
+        .nullable(),
       email: Yup.string().email(),
       phoneNumber: Yup.number().required(),
       placeOfResidence: Yup.string(),
+      rating: Yup.number()
+        .transform((value) => (isNaN(value) ? null : value))
+        .nullable(),
       //rating: Yup.lazy((value) => (value === '' ? null : Yup.number())),
-      rating: Yup.number(),
       description: Yup.string(),
     })
     .required();
@@ -118,6 +121,7 @@ export default function PanelFreelancerProfile() {
   });
 
   function onSubmit(data) {
+    console.log('onSubmit', data);
     return updateMode ? createFreelancer(data) : updateFreelancer(data);
   }
 
@@ -132,7 +136,7 @@ export default function PanelFreelancerProfile() {
   }
 
   function updateFreelancer(data) {
-    console.log('updateFreelancer', data)
+    console.log('updateFreelancer', data);
     return mutateFreelancerUpdate({
       variables: {
         updateFreelancerId: params.id,
@@ -303,11 +307,11 @@ export default function PanelFreelancerProfile() {
                     control={control}
                     name='availableFrom'
                     defaultValue={
-                      data?.freelancer
-                        ? new Date(
-                            data?.freelancer.data.attributes.availableFrom
-                          )
-                        : null
+                      (data?.freelancer.data.attributes.availableFrom &&
+                        new Date(
+                          data?.freelancer.data.attributes.availableFrom
+                        )) ||
+                      null
                     }
                     render={({ field }) => (
                       <ReactDatePicker
@@ -319,7 +323,9 @@ export default function PanelFreelancerProfile() {
                         )}
                         //placeholderText='Select date'
                         onChange={(e) => field.onChange(e)}
-                        selected={field.value}
+                        selected={
+                          (field.value && new Date(field.value)) || null
+                        }
                         todayButton='Today'
                         minDate={new Date()}
                       />
@@ -507,6 +513,57 @@ export default function PanelFreelancerProfile() {
                 </div>
                 <p className='mt-2 text-sm text-red-600' id='imageUrl-error'>
                   {errors.imageUrl?.message}
+                </p>
+              </div>
+
+              <div className='col-span-6 sm:col-span-4'>
+                <label
+                  htmlFor='competence'
+                  className='block text-sm font-medium text-gray-700'
+                >
+                  Competence
+                </label>
+                <div className='mt-1 relative'>
+                  <select
+                    {...register('competence')}
+                    defaultValue={data?.freelancer.data.attributes.competence}
+                    //defaultValue={data?.freelancer.data.attributes.competence}
+                    className={classNames(
+                      errors.competence
+                        ? 'border-red-300 text-red-900 focus:outline-none focus:ring-red-500 focus:border-red-500'
+                        : 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
+                      'block w-full sm:text-sm rounded-md'
+                    )}
+                  >
+                    <option value=''>Select...</option>
+                    <option value='.NET'>.NET</option>
+                    <option value='PHP'>PHP</option>
+                    <option value='Java'>Java</option>
+                    <option value='HTML'>HTML</option>
+                    <option value='Angular'>Angular</option>
+                    <option value='React'>React</option>
+                    <option value='Vue'>Vue</option>
+                    <option value='Azure'>Azure</option>
+                    <option value='AWS'>AWS</option>
+                    <option value='Google Cloud'>Google Cloud</option>
+                    <option value='Digital marketeer'>Digital marketeer</option>
+                    <option value='Business analyst'>Business analyst</option>
+                    <option value='Project manager'>Project manager</option>
+                    
+
+
+                  </select>
+                  {errors.competence && (
+                    <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                      <ExclamationCircleIcon
+                        className='h-5 w-5 text-red-500'
+                        aria-hidden='true'
+                      />
+                    </div>
+                  )}
+                </div>
+                <p className='mt-2 text-sm text-red-600' id='competence-error'>
+                  {errors.competence?.message}
                 </p>
               </div>
 

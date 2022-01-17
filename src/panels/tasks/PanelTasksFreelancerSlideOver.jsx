@@ -24,6 +24,7 @@ const FREELANCERS = gql`
           imageUrl
           availableFrom
           phoneNumber
+          competence
           tasks {
             data {
               id
@@ -423,13 +424,14 @@ export default function PanelTasksFreelancerSlideOver({
                                           {freelancer.attributes.lastName}
                                         </p>
                                         <p className='text-sm text-gray-500 truncate'>
-                                          {new Date(
+                                        {freelancer.attributes.competence}
+                                          {/* {new Date(
                                             freelancer.attributes.availableFrom
                                           ).toLocaleDateString(undefined, {
                                             year: 'numeric',
                                             month: 'short',
                                             day: 'numeric',
-                                          })}
+                                          })} */}
                                         </p>
                                       </div>
                                     </div>

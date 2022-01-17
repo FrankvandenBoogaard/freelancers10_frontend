@@ -27,7 +27,7 @@ import { setContext } from '@apollo/client/link/context';
 import { AUTH_TOKEN } from './hooks/constant';
 
 const httpLink = createHttpLink({
-  uri: 'https://infinite-eyrie-61215.herokuapp.com/graphql',
+  uri: 'https://pacific-thicket-76696.herokuapp.com/graphql',
   //uri: 'http://localhost:1337/graphql'
 });
 
