@@ -211,15 +211,15 @@ export default function PanelFreelancerProjects() {
                           day: 'numeric',
                         })}{' '}
                         -{' '}
-                        {project.attributes.projectFinish
-                          ? new Date(
-                              project.attributes.projectFinish
-                            ).toLocaleDateString(undefined, {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
-                            })
-                          : 'to be determined'}
+                        {(project?.attributes.projectFinish &&
+                          new Date(
+                            project.attributes.projectFinish
+                          ).toLocaleDateString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })) ||
+                          'to be determined'}
                       </p>
                     </div>
                   </div>
