@@ -36,8 +36,18 @@ export default function PanelCustomerProjectAdd({ refetch, setAddProject }) {
       .typeError('Date is required')
       .min(Yup.ref('projectStart'), "End date can't be before start date")
       .required('Date is required'),
-    projectPurchase: Yup.number().required('Purchase amount is required'),
-    projectSale: Yup.number().required('Sale amount is required'),
+    projectPurchase: Yup.number()
+    .min(0)
+    .max(99999999.99)
+    .nullable()
+    .transform((v, o) => (o === '' ? null : v))
+    .typeError('Not a number'),
+    projectSale: Yup.number()
+    .min(0)
+    .max(99999999.99)
+    .nullable()
+    .transform((v, o) => (o === '' ? null : v))
+    .typeError('Not a number'),
     projectDescription: Yup.string(),
   });
 
@@ -197,7 +207,9 @@ export default function PanelCustomerProjectAdd({ refetch, setAddProject }) {
                         )}
                         //placeholderText='Select date'
                         onChange={(e) => field.onChange(e)}
-                        selected={field.value}
+                        selected={
+                          (field.value && new Date(field.value)) || null
+                        }
                         todayButton='Today'
                         minDate={new Date()}
                       />
