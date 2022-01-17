@@ -419,13 +419,15 @@ export default function PanelFreelancerTasksSlideOver({
                                             day: 'numeric',
                                           })}{' '}
                                           -{' '}
-                                          {new Date(
-                                            task.attributes.taskFinish
-                                          ).toLocaleDateString(undefined, {
-                                            year: 'numeric',
-                                            month: 'short',
-                                            day: 'numeric',
-                                          })}
+                                          {(task?.attributes.taskFinish &&
+                                            new Date(
+                                              task?.attributes.taskFinish
+                                            ).toLocaleDateString(undefined, {
+                                              year: 'numeric',
+                                              month: 'short',
+                                              day: 'numeric',
+                                            })) ||
+                                            'to be determined'}
                                         </p>
                                       </div>
                                     </div>
