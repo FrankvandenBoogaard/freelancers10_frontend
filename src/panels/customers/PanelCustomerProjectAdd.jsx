@@ -34,8 +34,7 @@ export default function PanelCustomerProjectAdd({ refetch, setAddProject }) {
       .required('Date is required'),
     projectFinish: Yup.date()
       .typeError('Date is required')
-      .min(Yup.ref('projectStart'), "End date can't be before start date")
-      .required('Date is required'),
+      .min(Yup.ref('projectStart'), "End date can't be before start date"),
     projectPurchase: Yup.number()
     .min(0)
     .max(99999999.99)
