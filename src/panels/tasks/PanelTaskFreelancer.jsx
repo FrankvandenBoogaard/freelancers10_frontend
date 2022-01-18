@@ -225,8 +225,8 @@ export default function PanelTaskFreelancer() {
                       </span>
                       <div className='ml-4 truncate'>
                         <p className='text-sm font-medium text-gray-900 truncate'>
-                          {freelancer.attributes.firstName},{' '}
-                          {freelancer.attributes.lastName}
+                          {freelancer.attributes.lastName},{' '}
+                          {freelancer.attributes.firstName}
                         </p>
                         <p className='text-sm text-gray-500 truncate'>
                           {freelancer.attributes.placeOfResidence}

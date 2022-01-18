@@ -114,17 +114,31 @@ export default function PanelTasksFreelancerSlideOver({
   function onSubmit(e) {
     refetchDirectory({
       filters: {
-        tasks: {
-          freelancer: {
-            id: {
-              eq: null,
+        or: [
+          {
+            lastName: {
+              containsi: e.search,
             },
           },
-        },
-        lastName: {
-          containsi: e.search,
-        },
-      },
+          {
+            competence: {
+              containsi: e.search,
+            },
+          },
+        ],
+      }
+      // filters: {
+      //   tasks: {
+      //     freelancer: {
+      //       id: {
+      //         eq: null,
+      //       },
+      //     },
+      //   },
+      //   lastName: {
+      //     containsi: e.search,
+      //   },
+      // },
     });
   }
 
@@ -134,14 +148,19 @@ export default function PanelTasksFreelancerSlideOver({
       resetField('search');
       refetchDirectory({
         filters: {
-          tasks: {
-            freelancer: {
-              id: {
-                eq: null,
-              },
-            },
+          lastName: {
+            containsi: '',
           },
         },
+        // filters: {
+        //   tasks: {
+        //     freelancer: {
+        //       id: {
+        //         eq: null,
+        //       },
+        //     },
+        //   },
+        // },
       });
     }
   }
@@ -234,7 +253,7 @@ export default function PanelTasksFreelancerSlideOver({
                             autoComplete='off'
                             {...register('search')}
                             className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
-                            placeholder='Last name'
+                            placeholder='Last name / Competence'
                           />
                         </div>
                       </div>
@@ -420,8 +439,8 @@ export default function PanelTasksFreelancerSlideOver({
                                       </span>
                                       <div className='ml-4 truncate'>
                                         <p className='text-sm font-medium text-gray-900 truncate'>
-                                          {freelancer.attributes.firstName},{' '}
-                                          {freelancer.attributes.lastName}
+                                          {freelancer.attributes.lastName},{' '}
+                                          {freelancer.attributes.firstName}
                                         </p>
                                         <p className='text-sm text-gray-500 truncate'>
                                         {freelancer.attributes.competence}

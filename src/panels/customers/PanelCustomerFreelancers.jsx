@@ -176,16 +176,23 @@ export default function PanelCustomerFreelancers() {
                 >
                   <div className='absolute inset-0' aria-hidden='true' />
                   <div className='flex-1 flex items-center min-w-0 relative'>
-                    <span className='flex-shrink-0 inline-block relative'>
+                    <span className='bg-gray-100 border rounded-full flex-shrink-0 inline-block relative'>
                       {/* <DocumentIcon
                         className='border bg-gray-50 rounded-lg p-1 text-gray-500 flex-shrink-0 h-12 w-12'
                         aria-hidden='true'
                       /> */}
-                      <img
-                        className='border bg-gray-100 h-12 w-12 rounded-full'
-                        src={freelancer.attributes.imageUrl}
-                        alt=''
-                      />
+                      {freelancer.attributes.imageUrl ? (
+                                <img
+                                  className='border h-12 w-12 rounded-full'
+                                  src={freelancer.attributes.imageUrl}
+                                  alt=''
+                                />
+                              ) : (
+                                <UserIcon
+                                  className='text-gray-300 flex-shrink-0 h-12 w-12 p-1'
+                                  aria-hidden='true'
+                                />
+                              )}
                       {/* <span
                     className={classNames(
                       person.status === 'online'
@@ -198,8 +205,8 @@ export default function PanelCustomerFreelancers() {
                     </span>
                     <div className='ml-4 truncate'>
                       <p className='text-sm font-medium text-gray-900 truncate'>
-                        {freelancer.attributes.firstName},{' '}
-                        {freelancer.attributes.lastName}
+                        {freelancer.attributes.lastName},{' '}
+                        {freelancer.attributes.firstName}
                       </p>
                       <p className='text-sm text-gray-500 truncate'>
                         {freelancer.attributes.placeOfResidence}
