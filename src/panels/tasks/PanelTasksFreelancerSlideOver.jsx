@@ -81,15 +81,15 @@ export default function PanelTasksFreelancerSlideOver({
     refetch: refetchDirectory,
   } = useQuery(FREELANCERS, {
     variables: {
-      filters: {
-        tasks: {
-          freelancer: {
-            id: {
-              eq: null,
-            },
-          },
-        },
-      },
+      // filters: {
+      //   tasks: {
+      //     freelancer: {
+      //       id: {
+      //         eq: null,
+      //       },
+      //     },
+      //   },
+      // },
       sort: 'lastName',
       pagination: { pageSize: 1000 },
       taskId: taskId,

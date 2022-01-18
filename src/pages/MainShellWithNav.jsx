@@ -206,7 +206,7 @@ export default function MainShellWithNav() {
                     </div>
                   </nav>
                 </div>
-                <div className='flex-shrink-0 flex border-t border-gray-200 p-4'>
+                {/* <div className='flex-shrink-0 flex border-t border-gray-200 p-4'>
                   <a href='#' className='flex-shrink-0 group block'>
                     <div className='flex items-center'>
                       <div>
@@ -226,7 +226,7 @@ export default function MainShellWithNav() {
                       </div>
                     </div>
                   </a>
-                </div>
+                </div> */}
               </div>
             </Transition.Child>
             <div className='flex-shrink-0 w-14' aria-hidden='true'>
