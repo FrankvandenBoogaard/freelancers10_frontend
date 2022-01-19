@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AUTH_TOKEN } from '../hooks/constant';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { Submitting } from '../common/Loading';
 
 /*
   This example requires Tailwind CSS v2.0+ 
@@ -87,7 +88,7 @@ export default function Login() {
     });
   }
 
-  if (loading) return 'Submitting...';
+  if (true) return <Submitting />;
   //if (error) return `Submission error! ${error.message}`;
 
   return (
