@@ -382,7 +382,7 @@ export default function PanelFreelancerProfile() {
                       errors.phoneNumber
                         ? 'border-red-300 text-red-900 focus:outline-none focus:ring-red-500 focus:border-red-500'
                         : 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
-                      'block w-full pl-8 sm:pl-6 sm:text-sm rounded-md placeholder:text-gray-400'
+                      'block w-full pl-7 sm:pl-5 sm:text-sm rounded-md placeholder:text-gray-400'
                     )}
                   />
                   {errors.phoneNumber && (

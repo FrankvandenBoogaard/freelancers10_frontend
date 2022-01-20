@@ -17,7 +17,21 @@ const TASKS = gql`
         attributes {
           taskName
           taskStart
-          taskFinish
+          project {
+            data {
+              attributes {
+                projectName
+                projectStart
+                customer {
+                  data {
+                    attributes {
+                      customerName
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -281,7 +295,9 @@ export default function DirectoryTasks() {
                                 {task.attributes.taskName}
                               </p>
                               <p className='text-sm text-gray-500 truncate'>
-                                {new Date(
+                                {task.attributes.project.data.attributes.customer.data.attributes.customerName}
+
+                                {/* {new Date(
                                   task.attributes.taskStart
                                 ).toLocaleDateString(undefined, {
                                   year: 'numeric',
@@ -297,7 +313,7 @@ export default function DirectoryTasks() {
                                     month: 'short',
                                     day: 'numeric',
                                   })) ||
-                                  'to be determined'}
+                                  'to be determined'} */}
                               </p>
                             </div>
                           </div>
