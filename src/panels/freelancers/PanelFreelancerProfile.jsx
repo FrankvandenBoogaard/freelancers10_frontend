@@ -92,11 +92,11 @@ export default function PanelFreelancerProfile() {
         .typeError('Not a number'),
       email: Yup.string().email(),
       phoneNumber: Yup.number()
-      .min(0)
-      .max(999999999999999)
-      .integer('no decimals')
-      .nullable()
-      .transform((v, o) => (o === '' ? null : v))
+        .min(0)
+        .max(999999999999999)
+        .integer('no decimals')
+        .nullable()
+        .transform((v, o) => (o === '' ? null : v))
         .required('Phone number is required')
         .typeError('Not a number'),
       placeOfResidence: Yup.string(),
@@ -369,9 +369,12 @@ export default function PanelFreelancerProfile() {
                   Phone*
                 </label>
                 <div className='mt-1 relative'>
+                  <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                    <span className='text-gray-500 sm:text-sm'>+</span>
+                  </div>
                   <input
                     type='text'
-                    placeholder='e.g. 3161234567'
+                    placeholder='3161234567'
                     inputMode='numeric'
                     {...register('phoneNumber')}
                     defaultValue={data?.freelancer.data.attributes.phoneNumber}
@@ -379,7 +382,7 @@ export default function PanelFreelancerProfile() {
                       errors.phoneNumber
                         ? 'border-red-300 text-red-900 focus:outline-none focus:ring-red-500 focus:border-red-500'
                         : 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
-                      'block w-full sm:text-sm rounded-md'
+                      'block w-full pl-8 sm:pl-6 sm:text-sm rounded-md placeholder:text-gray-400'
                     )}
                   />
                   {errors.phoneNumber && (
