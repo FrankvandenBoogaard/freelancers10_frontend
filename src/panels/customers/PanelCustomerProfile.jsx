@@ -298,6 +298,7 @@ export default function PanelCustomerProfile() {
                 <div className='mt-1 relative'>
                   <input
                     type='text'
+                    placeholder='e.g. 3161234567'
                     inputMode='numeric'
                     {...register('customerPhone')}
                     defaultValue={data?.customer.data.attributes.customerPhone}

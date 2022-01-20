@@ -371,6 +371,7 @@ export default function PanelFreelancerProfile() {
                 <div className='mt-1 relative'>
                   <input
                     type='text'
+                    placeholder='e.g. 3161234567'
                     inputMode='numeric'
                     {...register('phoneNumber')}
                     defaultValue={data?.freelancer.data.attributes.phoneNumber}
