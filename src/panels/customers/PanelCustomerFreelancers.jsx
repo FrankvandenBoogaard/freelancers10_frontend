@@ -182,17 +182,17 @@ export default function PanelCustomerFreelancers() {
                         aria-hidden='true'
                       /> */}
                       {freelancer.attributes.imageUrl ? (
-                                <img
-                                  className='border h-12 w-12 rounded-full'
-                                  src={freelancer.attributes.imageUrl}
-                                  alt=''
-                                />
-                              ) : (
-                                <UserIcon
-                                  className='text-gray-300 flex-shrink-0 h-12 w-12 p-1'
-                                  aria-hidden='true'
-                                />
-                              )}
+                        <img
+                          className='border h-12 w-12 rounded-full'
+                          src={freelancer.attributes.imageUrl}
+                          alt=''
+                        />
+                      ) : (
+                        <UserIcon
+                          className='text-gray-300 flex-shrink-0 h-12 w-12 p-1'
+                          aria-hidden='true'
+                        />
+                      )}
                       {/* <span
                     className={classNames(
                       person.status === 'online'

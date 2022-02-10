@@ -39,7 +39,7 @@ const navigation = [
   { name: 'Dashboard', to: '/', icon: HomeIcon },
   {
     name: 'Freelancers',
-    to: '/freelancers/add',
+    to: '/freelancersdashboard',
     icon: UsersIcon,
   },
   {
@@ -352,7 +352,7 @@ export default function MainShellWithNav() {
               </div>
             </div>
           </div>
-          <div className='flex-1 relative z-0 flex overflow-hidden'>
+          <div className='flex-1 relative z-0 flex overflow-y-auto'>
             <Outlet />
           </div>
         </div>

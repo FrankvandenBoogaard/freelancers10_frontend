@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { ChevronLeftIcon, MailIcon, PhoneIcon } from '@heroicons/react/solid';
 
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { Tab } from '@headlessui/react';
 import PanelFreelancerTasks from './PanelFreelancerTasks';
@@ -56,8 +56,8 @@ export default function PanelFreelancer() {
         className='flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden'
         aria-label='Breadcrumb'
       >
-        <a
-          href='#'
+        <Link
+          to='/freelancersDashboard'
           className='inline-flex items-center space-x-3 text-sm font-medium text-gray-900'
         >
           <ChevronLeftIcon
@@ -65,7 +65,7 @@ export default function PanelFreelancer() {
             aria-hidden='true'
           />
           <span>Freelancers</span>
-        </a>
+        </Link>
       </nav>
 
       {data?.freelancer.data !== null ? (

@@ -1,4 +1,4 @@
-import { SearchIcon, RefreshIcon } from '@heroicons/react/solid';
+import { SearchIcon, RefreshIcon, PlusIcon } from '@heroicons/react/solid';
 import { UserIcon } from '@heroicons/react/outline';
 import { Outlet, Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
@@ -109,7 +109,7 @@ export default function DirectoryFreelancers() {
             {data?.freelancers.data.length !== 1 && 's'}
           </p>
           <form
-            className='mt-6 flex space-x-4'
+            className='mt-6 flex space-x-2'
             onSubmit={handleSubmit(onSubmit)}
             onKeyDown={(key) => checkKeyDown(key)}
           >
@@ -146,6 +146,16 @@ export default function DirectoryFreelancers() {
               />
               <span className='sr-only'>Search</span>
             </button>
+            <Link
+              // onClick={() => {
+              //   navigate('/freelancers/add');
+              // }}
+              to='/freelancers/add'
+              className='inline-flex justify-center px-3.5 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+            >
+              <PlusIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
+              <span className='sr-only'>Search</span>
+            </Link>
           </form>
         </div>
         {/* Directory list */}

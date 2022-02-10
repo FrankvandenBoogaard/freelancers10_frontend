@@ -22,9 +22,10 @@ import ProjectNotFound from './panels/projects/ProjectNotFound';
 import TaskNotFound from './panels/tasks/TaskNotFound';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
-//import useAuth from './hooks/useAuth';
 import { setContext } from '@apollo/client/link/context';
 import { AUTH_TOKEN } from './hooks/constant';
+import FreelancersDashboard from './panels/freelancers/FreelancersDashboard';
+import Test from './Test';
 
 const httpLink = createHttpLink({
   uri: 'https://protected-headland-21501.herokuapp.com/graphql',
@@ -43,7 +44,6 @@ const authLink = setContext((_, { headers }) => {
 
 // apollo client
 const client = new ApolloClient({
-  //link: httpLink,
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     typePolicies: {
@@ -65,7 +65,6 @@ const client = new ApolloClient({
 
 function RequireAuth({ children }) {
   const authToken = localStorage.getItem(AUTH_TOKEN);
-  //const { authed } = useAuth();
   const location = useLocation();
 
   return authToken ? (
@@ -90,6 +89,11 @@ export default function App() {
         >
           <Route index element={<Dashboard />} />
           <Route path='settings' element={<Settings />} />
+          <Route path='test' element={<Test />} />
+          <Route
+            path='freelancersdashboard'
+            element={<FreelancersDashboard />}
+          />
           <Route path='freelancers' element={<DirectoryFreelancers />}>
             <Route index element={<FreelancerNotFound />} />
             <Route

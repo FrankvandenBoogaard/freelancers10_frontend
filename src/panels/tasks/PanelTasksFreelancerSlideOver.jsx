@@ -126,7 +126,7 @@ export default function PanelTasksFreelancerSlideOver({
             },
           },
         ],
-      }
+      },
       // filters: {
       //   tasks: {
       //     freelancer: {
@@ -443,7 +443,7 @@ export default function PanelTasksFreelancerSlideOver({
                                           {freelancer.attributes.firstName}
                                         </p>
                                         <p className='text-sm text-gray-500 truncate'>
-                                        {freelancer.attributes.competence}
+                                          {freelancer.attributes.competence}
                                           {/* {new Date(
                                             freelancer.attributes.availableFrom
                                           ).toLocaleDateString(undefined, {
